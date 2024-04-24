@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Handlee&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap&family=Allura&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <title>Urban Garden</title>
+  </head>
+  <style>
+    :root {
+      --primary-color: #3c929c;
+      --primary-font: "Handlee", cursive;
+      --secondary-color: #fffdf6;
+      --secondary-font: "Poppins", sans-serif;
+      --tertiary-color: #156875;
+    }
+
+    body {
+      background-color: var(--primary-color);
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: var(--primary-font);
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: var(--primary-color);
+      font-family: var(--secondary-font);
+      font-size: 20px;
+      font-weight: normal;
+    }
+
+    p,
+    li {
+      font-family: var(--secondary-font);
+      font-weight: normal;
+    }
+
+    .container {
+      margin: 0 auto;
+      max-width: 1500px;
+    }
+
+    header {
+      background-color: #bc6b32;
+      padding: 0;
+    }
+
+    header h1 {
+      color: #fff7eb;
+      font-size: 78px;
+    }
+
+    header h2 {
+      color: #fff7eb;
+      font-size: 24px;
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .grid-header {
+      grid-gap: 20px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .header-item-left {
+      padding: 70px 20px 70px 100px;
+    }
+
+    /* Ensures that the image fits the width of the parent container */
+    .header-item-right img {
+      border-radius: 48% 52% 34% 66% / 37% 84% 16% 63%;
+      max-width: 80%;
+      position: relative;
+      top: 50px;
+    }
+
+    .first-division {
+      background-color: #156875;
+      grid-gap: 20px;
+      grid-template-columns: 1fr 1fr;
+      padding: 50px;
+    }
+
+    .first-division-item-right {
+      padding: 50px 60px 30px 0;
+    }
+
+    .triad-image-center {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    .triad-image-wrapper {
+      height: 496px;
+      overflow: visible;
+      position: relative;
+      width: 500px;
+    }
+
+    .triad-image {
+      height: auto;
+      max-width: 420px;
+      position: absolute;
+      top: -105px;
+    }
+
+    .first-division h1 {
+      color: var(--secondary-color);
+      font-size: 38px;
+    }
+
+    .first-division p {
+      color: var(--secondary-color);
+      font-size: 20px;
+    }
+
+    .second-division {
+      background-color: #b9decc69;
+      color: #fffdf6;
+      grid-gap: 0;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 45px;
+    }
+
+    .second-division h1 {
+      margin-left: 0;
+    }
+
+    .second-division li {
+      font-size: 20px;
+    }
+
+    .second-division ul {
+      margin-left: 0;
+    }
+
+    .second-division-item-left {
+      padding-left: 50px;
+    }
+
+    .green-thumb-image-center {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    .green-thumb-image-wrapper {
+      height: 280px;
+      overflow: visible;
+      position: relative;
+      width: 380px;
+    }
+
+    .green-thumb-image {
+      border-radius: 79% 69% 100% 30% / 0% 72% 81% 39%;
+      height: auto;
+      left: -50px;
+      max-width: 380px;
+      position: absolute;
+      top: -70px;
+    }
+
+    .biodiversity-image-center {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      padding-right: 15px;
+    }
+
+    .biodiversity-image-wrapper {
+      height: 400px;
+      overflow: visible;
+      position: relative;
+      width: 100px;
+    }
+
+    .collage {
+      border-radius: 55% 45% 50% 50% / 43% 66% 34% 57%;
+      height: auto;
+      max-width: 400px;
+      position: absolute;
+      right: -180px;
+      top: -120px;
+    }
+
+    .third-division {
+      background-color: var(--tertiary-color);
+      color: var(--secondary-color);
+      font-family: var(--secondary-font);
+    }
+
+    .form-division {
+      padding: 5px 350px 100px 350px;
+    }
+
+    .third-division-text {
+      padding-top: 100px;
+    }
+
+    .third-division h1 {
+      color: var(--secondary-color);
+      font-size: 45px;
+      margin-top: 100px;
+      padding: 0 50px;
+      text-align: center;
+    }
+
+    .third-division h2 {
+      color: var(--secondary-color);
+      font-size: 18px;
+      margin: 0px 100px;
+      padding: 20px 250px 45px 250px;
+      text-align: center;
+    }
+
+    .third-division h3 {
+      color: var(--secondary-color);
+      font-size: 36px;
+      font-weight: normal;
+      margin: 0;
+      text-align: left;
+    }
+
+    .third-division form {
+      display: flex;
+    }
+
+    .form-container {
+      background-color: #fff8ee;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      padding: 30px 30px;
+    }
+
+    .instructions {
+      border: 1px solid rgba(39, 33, 66, 0.5);
+      border-radius: 50px;
+      color: #272044;
+      font-size: 16px;
+      line-height: 20px;
+      padding: 16px;
+      width: 80%;
+    }
+
+    .submit-button {
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 50px;
+      color: var(--secondary-color);
+      font-size: 16px;
+      margin-left: 10px;
+      padding: 14px 24px;
+      width: 150px;
+    }
+
+    .advice {
+      border-left: 3px solid var(--secondary-color);
+      border-radius: 8px;
+      font-size: 18px;
+      line-height: 24px;
+      padding: 20px;
+    }
+
+    .advice p {
+      margin-top: 0;
+    }
+
+    .hint {
+      color: var(--primary-color);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 5px;
+      padding-left: 15px;
+    }
+
+    footer {
+      margin: 50px 0;
+    }
+
+    footer a {
+      color: #a7d8d4;
+      font-family: "Allura", cursive;
+      font-size: 28px;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #b8f0ec;
+    }
+
+    footer h1 {
+      color: #a7d8d4;
+      font-family: var(--secondary-font);
+      font-size: 18px;
+      font-weight: normal;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        overflow-x: hidden;
+        margin: 0;
+      }
+
+      main {
+        overflow-x: hidden;
+      }
+
+      header {
+        overflow-x: hidden;
+      }
+
+      header h1 {
+        font-size: 30px;
+      }
+
+      header h2 {
+        font-size: 16px;
+      }
+
+      .header-item-left {
+        padding: 26px;
+        text-align: center;
+      }
+
+      .header-item-right {
+        padding: 5px 26px;
+        text-align: center;
+      }
+
+      .header-item-right img {
+        max-width: 250px;
+        top: -15px;
+      }
+
+      .grid {
+        grid-gap: 12px;
+        grid-template-columns: 1fr;
+      }
+      .first-division {
+        padding: 0;
+      }
+
+      .first-division h1 {
+        text-align: left;
+        font-size: 28px;
+        margin: 5px 0;
+      }
+
+      .first-division p {
+        font-size: 15px;
+        text-align: left;
+      }
+
+      .first-division-item-right {
+        padding: 0 26px;
+        text-align: center;
+      }
+
+      .triad-image-center {
+        width: 200px;
+        padding: 17px;
+      }
+
+      .triad-image {
+        width: 230px;
+        padding: 30px 60px;
+        top: 0;
+      }
+
+      .triad-image-wrapper {
+        height: 360px;
+      }
+      .second-division {
+        padding: 0;
+      }
+
+      .second-division-item-left {
+        padding: 10px 26px;
+      }
+
+      .second-division h1 {
+        font-size: 28px;
+        padding-left: 0;
+      }
+
+      .second-division p {
+        font-size: 15px;
+      }
+
+      .second-division li {
+        font-size: 15px;
+      }
+
+      .second-division ul {
+        margin: 0;
+        padding-left: 10px;
+      }
+
+      .biodiversity-image-center {
+        padding-right: 190px;
+      }
+
+      .collage {
+        border-radius: 0;
+        max-width: 280px;
+        top: -20px;
+      }
+
+      .green-thumb-image-center {
+        display: none;
+      }
+
+      .third-division {
+        padding: 0;
+      }
+
+      .form-division {
+        margin: 30px 5px;
+        padding: 5px 10px 15px 10px;
+      }
+
+      .third-division-text {
+        padding-top: 10px;
+      }
+
+      .third-division h1 {
+        font-size: 28px;
+        text-align: left;
+        margin: 5px 0;
+        padding: 10px 25px;
+      }
+
+      .third-division h2 {
+        font-size: 15px;
+        text-align: left;
+        padding: 0px 15px 10px 25px;
+        margin: 0px;
+      }
+
+      .third-division h3 {
+        font-size: 16px;
+      }
+
+      .instructions {
+        border-radius: 50px;
+        font-size: 10px;
+        padding: 7px;
+        width: 90%;
+      }
+
+      .submit-button {
+        font-size: 14px;
+        padding: 10px 15px;
+      }
+
+      .advice {
+        font-size: 14px;
+      }
+
+      .advice p {
+        margin-top: 0;
+        font-size: 14px;
+      }
+
+      .hint {
+        font-size: 10px;
+        padding-left: 6.5px;
+      }
+
+      footer {
+        margin: 20px 0;
+      }
+
+      footer a {
+        font-size: 18px;
+      }
+
+      footer h1 {
+        font-size: 12px;
+      }
+    }
+  </style>
+  <body id="top">
+    <div class="container">
+      <header>
+        <div class="grid grid-header">
+          <div class="header-item-left">
+            <h1>Urban Gardens</h1>
+            <h2>
+              Celebrating the beauty and tranquillity that gardens bring to our
+              lives.
+            </h2>
+          </div>
+          <div class="header-item-right">
+            <img
+              class="robin-tree"
+              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/123/288/original/robin_cherrytree.jpeg?1713190922"
+              alt="Robin in a garden"
+            />
+          </div>
+        </div>
+      </header>
+      <main>
+        <div class="grid first-division">
+          <div class="triad-image-center">
+            <div class="triad-image-wrapper">
+              <img
+                class="triad-image"
+                src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/123/289/original/triad-images.png?1713190932"
+                alt="Three Garden Images"
+              />
+            </div>
+          </div>
+          <div class="first-division-item-right">
+            <h1>Why Having Urban Gardens?</h1>
+            <p>
+              Urban gardens are precious green spaces amidst the hustle and
+              bustle of cities. They offer a number of benefits for the
+              environment, as well as for the physical and mental well-being of
+              people living in urban areas. They provide fresh produce, build
+              community bonds, and educate people about sustainability. They
+              promote healthy living, offer green spaces in cities, and
+              contribute to local food security. Additionally, they create
+              economic opportunities and support biodiversity, making cities
+              more resilient and sustainable places to live.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid second-division">
+          <div class="second-division-item-left">
+            <h1>Benefits of Urban Gardens</h1>
+            <ul>
+              <li>Reducing urban heat</li>
+              <li>Improving air quality</li>
+              <li>Promotion of biodiversity</li>
+              <li>Mental and physical well-being</li>
+            </ul>
+          </div>
+          <div class="biodiversity-image-center">
+            <div class="biodiversity-image-wrapper">
+              <img
+                class="collage"
+                src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/123/286/original/collage.png?1713190901"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="green-thumb-image-center">
+            <div class="green-thumb-image-wrapper">
+              <img
+                class="green-thumb-image"
+                src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/123/287/original/green-thumb.jpeg?1713190914"
+                alt="A person watering plants"
+              />
+            </div>
+          </div>
+        </div>
+        <section class="third-division">
+          <div class="third-division-text">
+            <h1>Would you like some advice about plants?</h1>
+            <h2>
+              Let me be your flora advisor, steering you through each leafy
+              corridor. With a green thumb and a heart full of care, I'll help
+              your garden thrive, beyond compare. Type in the name of a plant
+              and I'll tell you how to take care of it.
+            </h2>
+          </div>
+          <div class="form-division">
+            <div class="form-container">
+              <form id="advice-generator-form">
+                <input
+                  type="text"
+                  placeholder="What's the name of your plant?"
+                  autofocus
+                  required
+                  autocomplete="off"
+                  class="instructions"
+                  id="user-instructions"
+                />
+                <input value="Submit" type="submit" class="submit-button" />
+              </form>
+              <div class="hint">i.e: Ficus Lyrata, Pothos, Orchid...</div>
+            </div>
+            <div class="advice" id="advice">
+              <h3>🪴...</h3>
+            </div>
+          </div>
+        </section>
+        <footer class="footer-message">
+          <h1>
+            This project was created by
+            <a href="https://geisalopes.github.io/" target="_blank"
+              >Geisa Lopes</a
+            >
+          </h1>
+        </footer>
+      </main>
+    </div>
+    <script>
+      function displayAdvice(response) {
+        new Typewriter("#advice", {
+          strings: response.data.answer,
+          autoStart: true,
+          delay: 1,
+          cursor: "",
+        });
+      }
+
+      function generateAdvisor(event) {
+        event.preventDefault();
+
+        let instructionsInput = document.querySelector("#user-instructions");
+        let apiKey = "bf12f0ob06f7acf048dt44a41aadd939";
+        let context =
+          "You're a plant expert and love writing short advices. Your mission is to generate a short piece of advice, in basic HTML. Don't include a title in the advice. Sign the advice with 'Your Gardening Advisor' inside a <strong/> element, only at the end of the advice. Make sure you follow the user instructions";
+        let prompt = `Generate an advice on ${instructionsInput.value}`;
+        let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
+
+        let adviceElement = document.querySelector("#advice");
+        adviceElement.innerHTML = `<div class="generating">🪴 Generating an advice for you...</div>`;
+
+        axios.get(apiUrl).then(displayAdvice);
+      }
+
+      let advisorElement = document.querySelector("#advice-generator-form");
+      advisorElement.addEventListener("submit", generateAdvisor);
+
+      window.addEventListener("load", function () {
+        if ("scrollBehavior" in document.documentElement.style) {
+          document.querySelector("#top").scrollIntoView({ behavior: "smooth" });
+        } else {
+          document.querySelector("#top").scrollIntoView();
+        }
+      });
+    </script>
+  </body>
+</html>
